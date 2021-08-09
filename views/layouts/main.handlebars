@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Blogs</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <header class="hero">
+      <nav>
+         <a href="/" class="nav-item ">Home</a>
+         <a href="/dashboard" class="nav-item ">Dashboard</a>
+        {{#if loggedIn}}
+          {{!-- <a href="/dashboard" class="nav-item ">Dashboard</a> --}}
+          <button id="logout" class="btn-no-style">Logout</button>
+        {{else}}
+          <a href="/login" class="nav-item ">Login</a>
+        {{/if}}
+      </nav>
+       <h1>
+          <h1 
+        <a href="/"class="app-title"><i class="fab fa-github"></i>Tech Blog</a>
+      </h1>
+    </header>
+    <main>
+      {{{ body }}}
+    </main>
+    <footer>
+
+    </footer>
+  </div>
+  
+  {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
+  {{/if}}
+</body>
+
+</html>

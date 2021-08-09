@@ -1,0 +1,15 @@
+<ol class="post-list">
+  {{#each posts as |post|}}
+  <li class="card">
+    <article class="post">
+        <div class="title card-header">
+            <a href="post/{{id}}" target="_blank">{{title}}</a>
+            <span>({{user.username}})</span>
+        </div>
+        <div class="meta">
+            <a href="/">{{content}}</a>
+        </div>
+    </article>
+  </li>
+  {{/each}}
+</ol>

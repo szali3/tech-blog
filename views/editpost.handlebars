@@ -1,0 +1,12 @@
+<form class="create-form card">
+  <h3 class="card-header text-uppercase">Edit Post</h3>
+  <div class="card-body">
+    <form id="user-form">
+      <label class="form-label" for="username">Title</label>
+      <input name="username" id="username" type="text" autofocus="true" class="form-input" value="{{post.title}}"/>
+      <label class="form-label" for="username">Content</label>
+      <textarea id="content-area" class="form-input" name="content-area" rows="2">{{post.content}}</textarea>
+      <button type="submit" class="btn">Edit</button>
+    </form>
+  </div>
+</form>

@@ -45,6 +45,21 @@ async function loginFormHandler(event) {
       }
     }
   }
+
+  function showSignUp(event){
+   event.preventDefault();
+      document.getElementById("sign-up").style.display = "block";
+      document.getElementById("login").style.display = "none";
+  }
+
+  function showLogin(event){
+     event.preventDefault();
+        document.getElementById("login").style.display = "block";
+        document.getElementById("sign-up").style.display = "none";
+    }
   
+  document.getElementById('signUpBtn').addEventListener('click', showSignUp);
+  document.getElementById('loginBtn').addEventListener('click', showLogin);
+
   document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
   document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);

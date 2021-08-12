@@ -127,6 +127,14 @@ li {
   margin: 0; /* Remove margins */
 }
 
+#add-post {
+  display: none;
+}
+
+#sign-up{
+  display: none; 
+}
+
 .meta{
   padding:1% ;
 }
@@ -166,7 +174,7 @@ li {
 }
 
 .app-title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   background-color: var(--primary);
   color: var(--dark);
   padding: 0 10px;

@@ -1,41 +1,39 @@
 <article class="post">
-        <div class="title card-header">
-            <a href="{{post.title}}" target="_blank">{{post.post_url}}</a>
-            <span>({{user}})</span>
-        </div>
-        <div class="meta">
-            <a href="/">{{post_body}}</a>
-        </div>
+  <div class="title card-header">
+      <a href="{{post.title}}">{{post.post_url}}</a>
+      <span>({{user}})</span>
+  </div>
+  <div class="meta">
+      <a href="/">{{post_body}}</a>
+  </div>
 </article>
 
 {{#if loggedIn}}
-<form class="comment-form">
-  <div>
-    <textarea name="comment-body"></textarea>
-  </div>
-
-  <div>
-    <button type="submit">add comment</button>
-    <button type="button" class="upvote-btn">upvote</button>
-  </div>
-</form>
+  <form class="comment-form">
+    <div>
+      <textarea name="comment-body"></textarea>
+    </div>
+    <div>
+      <button type="submit">add comment</button>
+      <button type="button" class="upvote-btn">upvote</button>
+    </div>
+  </form>
 {{/if}}
 
 <div class="comments">
   {{#each this}}
-  <section class="comment">
-    <div class="meta">
-      {{user.username}} on {{format_date created_at}}
-    </div>
-    <div class="text">
-      {{comment_text}}
-    </div>
-  </section>
+    <section class="comment">
+      <div class="meta">
+        {{user.username}} on {{format_date created_at}}
+      </div>
+      <div class="text">
+        {{comment_text}}
+      </div>
+    </section>
   {{/each}}
 </div>
 
-
 {{#if loggedIn}}
-<script src="/javascript/comment.js"></script>
-<script src="/javascript/upvote.js"></script>
+  {{!-- <script src="/javascript/comment.js"></script>
+  <script src="/javascript/upvote.js"></script> --}}
 {{/if}}

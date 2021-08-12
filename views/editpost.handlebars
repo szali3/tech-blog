@@ -3,10 +3,13 @@
   <div class="card-body">
     <form id="user-form">
       <label class="form-label" for="username">Title</label>
-      <input name="username" id="username" type="text" autofocus="true" class="form-input" value="{{post.title}}"/>
+      <input name="edit-title" id="username" type="text" autofocus="true" class="form-input" value="{{post.title}}"/>
       <label class="form-label" for="username">Content</label>
-      <textarea id="content-area" class="form-input" name="content-area" rows="2">{{post.content}}</textarea>
-      <button type="submit" class="btn">Edit</button>
+      <textarea id="edit-content" class="form-input" name="content-area" rows="2">{{post.content}}</textarea>
+      <button type="submit" id="editBtn" class="btn">Edit</button>
+      <button type="submit" id="deleteBtn" class="btn">delete</button>
     </form>
   </div>
 </form>
+
+<script src="/javascript/edit-post.js"></script>

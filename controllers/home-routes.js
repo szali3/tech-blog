@@ -6,37 +6,19 @@ const { Post, Users } = require('../models');
 router.get('/', (req, res) => {
   console.log('======================');
   Post.findAll({
-    // attributes: 
-    // { exclude: ['password'] },
-    //   'id',
-    //   'post_url',
-    //   'title',
-    //   'created_at',
-    //   [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-    
     include: [
       {
-        model: Users,
-    //     attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-    //     include: {
-    //       model: User,
-    //       attributes: ['username']
-        // }
-      },
-    //   {
-    //     model: User,
-    //     attributes: ['username']
-      // }
-    ]
-    // console.log(posts)
-    // res.render('homepage',{posts});
-})
+        model: Users
+      }]
+    })
     .then(dbPostData => {
       const posts = dbPostData.map(post => post.get({ plain: true }));
       console.log(posts)
+      navTitle = "The Tech Blog";
       res.render('homepage', {
         posts,
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn,
+        navTitle
       });
     })
     .catch(err => {
@@ -50,28 +32,7 @@ router.get('/post/:id', (req, res) => {
   Post.findOne({
     where: {
       id: req.params.id
-    },
-    // attributes: [
-    //   'id',
-    //   'post_url',
-    //   'title',
-    //   'created_at',
-    //   [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-    // ],
-    // include: [
-      // {
-      //   model: Comment,
-      //   attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-      //   include: {
-      //     model: User,
-      //     attributes: ['username']
-      //   }
-      // },
-      // {
-      //   model: User,
-      //   attributes: ['username']
-      // }
-    // ]
+    }
   })
     .then(dbPostData => {
       if (!dbPostData) {
@@ -80,10 +41,12 @@ router.get('/post/:id', (req, res) => {
       }
 
       const post = dbPostData.get({ plain: true });
+      const navTitle = "The tech Blog"
 
       res.render('editpost', {
         post,
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn,
+        navTitle
       });
     })
     .catch(err => {

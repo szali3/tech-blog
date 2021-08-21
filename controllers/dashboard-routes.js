@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-
-const {Users, Post } = require('../models');
+const {Users, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
   
 // get all posts for dashboard
@@ -11,7 +10,21 @@ router.get('/', withAuth, (req, res) => {
   Post.findAll({
     where: {
       user_id: req.session.user_id
-    }
+    },
+    include: [
+      {
+        model: Comment,
+        // attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        include: {
+          model: Users,
+          attributes: ['username']
+        }
+      },
+      {
+        model: Users,
+        attributes: ['username']
+      }
+    ]
   })
   .then(dbPostData => {
     const posts = dbPostData.map(post => post.get({ plain: true }));
@@ -36,14 +49,14 @@ router.get('/post/:id', withAuth, (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        // attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
         include: {
-          model: User,
+          model: Users,
           attributes: ['username']
         }
       },
       {
-        model: User,
+        model: Users,
         attributes: ['username']
       }
     ]

@@ -44,8 +44,17 @@ p {
 }
 
 a {
-  /* font-size: 1.2rem; */
   text-decoration: none;
+}
+
+.title a {
+  /* font-size: 1.2rem; */
+  color: var(--primary);
+
+}
+
+#post-title a{
+  color: white;
 }
 
 /*  Nav List */
@@ -137,6 +146,11 @@ li {
 
 .meta{
   padding:1% ;
+
+}
+
+.meta a {
+  color:black;
 }
 
 
@@ -225,10 +239,17 @@ li {
 }
 
 .card-header {
+  display: flex;
+  justify-content: space-between;
   color: var(--primary);
   background-color: var(--dark);
   padding: 1%;
   border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
+}
+
+#card-title{
+  color: white;
+  /* background-color: white; */
 }
 
 .card-body {

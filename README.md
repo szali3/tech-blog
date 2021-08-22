@@ -1,12 +1,10 @@
-https://pacific-basin-47076.herokuapp.com/
+# The Tech Blogs
 
-# employeeTracker
-
-![Screenshot](insomnia.PNG)
+![Screenshot](public/assets/img/techblog.PNG)
 
 ## Summary  
 
-This project will build the back end for an e-commerce site. It uses Express.js to configure routes and Sequelize to interact with a MySQL database. the project uses .env to save envirnoment vairables to seperate file. it will also use insonima to test backend routes.
+A CMS-style blog site that allows the user to create blog posts and edit post. User can also delete post as well. The user can comment on post in the mainpage as well.
 
 ## Installation
 
@@ -15,13 +13,13 @@ npm init
 npm install
 npm start
 
-## Walkthrough Video
+## Website
 
-https://drive.google.com/file/d/1JdGvlI281nO96gk3T70fKGqGzQ5vgAut/view?usp=sharing
+https://pacific-basin-47076.herokuapp.com/
 
 ## Tools used
 
-Node,Express,dotenv,squelelize,insonima and msql2.
+Node, Express, dotenv, squelelize, handlebars, insonima connect-session-sequelize and bcrypt.
 
 ## Contributors
 

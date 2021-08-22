@@ -1,6 +1,5 @@
 async function createPostFormHandler(event){
   event.preventDefault();
-  alert("yes!!")
 
   const title = document.querySelector('input[name="add-title"]').value.trim();
   const content = document.querySelector("#add-content").value.trim();
@@ -16,7 +15,7 @@ async function createPostFormHandler(event){
     });
     
     if (response.ok) {
-        document.location.replace('/dashboard/');
+      location.reload();
     } else {
       alert(response.statusText);
     }

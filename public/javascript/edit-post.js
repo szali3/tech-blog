@@ -3,7 +3,6 @@ const id = window.location.toString().split('/')[
 
 async function createPostFormHandler(event){
     event.preventDefault();
-    alert(id)
 
     const title = document.querySelector('input[name="edit-title"]').value.trim();
     const content = document.querySelector("#edit-content").value.trim();
@@ -20,7 +19,7 @@ async function createPostFormHandler(event){
       });
       
       if (response.ok) {
-          document.location.replace('/dashboard/');
+          document.location.replace('/dashboard');
         } else {
           alert(response.statusText);
         }
@@ -35,7 +34,7 @@ async function deletePostFormHandler(event){
   });
 
   if (response.ok) {
-    document.location.replace('/dashboard/');
+    document.location.replace('/dashboard');
   } else {
     alert(response.statusText);
   }

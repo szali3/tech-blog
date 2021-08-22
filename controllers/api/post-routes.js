@@ -1,12 +1,20 @@
 const router = require('express').Router();
-const sequelize = require('../../config/connection');
-const { Post, Users, Comment } = require('../../models');
+// const sequelize = require('../../config/connection');
+const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// get all users
+// get all post
 router.get('/', (req, res) => {
   console.log('======================');
-  Post.findAll({})
+  Post.findAll({
+    attributes: [
+      'id',
+      'title',
+      'content',
+      'user_id',
+      'createdAt'
+    ]
+  })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
       console.log(err);
@@ -14,6 +22,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// get single post by ID
 router.get('/:id', (req, res) => {
   Post.findOne({
     where: {
@@ -33,6 +42,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// create new post
 router.post('/', (req, res) => {
   Post.create({
     title: req.body.title,
@@ -46,6 +56,7 @@ router.post('/', (req, res) => {
     });
 });
 
+// update by user ID
 router.put('/:id', withAuth, (req, res) => {
   Post.update(
     {
@@ -71,8 +82,9 @@ router.put('/:id', withAuth, (req, res) => {
     });
 });
 
+// delete user by ID
 router.delete('/:id', withAuth, (req, res) => {
-  console.log('id', req.params.id);
+  //console.log('id', req.params.id);
   Post.destroy({
     where: {
       id: req.params.id

@@ -58,7 +58,6 @@ a {
 }
 
 /*  Nav List */
-
 .nav-item {
   margin-bottom: 10px;
   padding-right: 1.5%;
@@ -68,7 +67,7 @@ a {
   text-decoration: none;
 }
 
- .btn {
+.btn {
   font-size: 1.3rem;
   text-decoration:none;
   padding: 6px 5px;
@@ -154,6 +153,14 @@ li {
   color:black;
 }
 
+.comment {
+ /* color :red; */
+ margin: 0 0 20px 0;
+ padding: 10px  10px 10px 10px;
+ border:1px solid var(--dark);
+ font-style: italic;
+ border-radius: var(--border-radius);
+}
 
 .btn-back {
   border-radius: var(--border-radius);

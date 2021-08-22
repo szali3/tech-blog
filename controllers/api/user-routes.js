@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const { Post,Users } = require('../../models');
 
+// api/users/
+
 // get all users
 router.get('/', (req, res) => {
-  Users.findAll({
-    // attributes: { exclude: ['password'] }
-  })
+  Users.findAll({})
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
       console.log(err);
@@ -16,30 +16,9 @@ router.get('/', (req, res) => {
 // find one user
 router.get('/:id', (req, res) => {
   Users.findOne({
-    // attributes: { exclude: ['password'] },
     where: {
       id: req.params.id
-    },
-    // include: [
-    //   {
-    //     model: Post,
-    //     attributes: ['id', 'title', 'post_url', 'created_at']
-    //   },
-    //   {
-    //     model: Comment,
-    //     attributes: ['id', 'comment_text', 'created_at'],
-    //     include: {
-    //       model: Post,
-    //       attributes: ['title']
-    //     }
-    //   },
-    //   {
-    //     model: Post,
-    //     attributes: ['title'],
-    //     through: Vote,
-    //     as: 'voted_posts'
-    //   }
-    // ]
+    }
   })
     .then(dbUserData => {
       if (!dbUserData) {
@@ -56,7 +35,6 @@ router.get('/:id', (req, res) => {
 
 // Create user
 router.post('/', (req, res) => {
-  // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
   Users.create({
     username: req.body.username,
     password: req.body.password
@@ -66,7 +44,7 @@ router.post('/', (req, res) => {
         req.session.user_id = dbUserData.id;
         req.session.username = dbUserData.username;
         req.session.loggedIn = true;
-  
+
         res.json(dbUserData);
       });
     })
@@ -78,7 +56,6 @@ router.post('/', (req, res) => {
 
 // login route where user password is checked
 router.post('/login', (req, res) => {
-  // expects {email: 'lernantino@gmail.com', password: 'password1234'}
   Users.findOne({
     where: {
       username: req.body.username
@@ -104,30 +81,6 @@ router.post('/login', (req, res) => {
       res.json({ user: dbUserData, message: 'You are now logged in!' });
     });
   });
-});
-
-// Update users
-router.put('/:id', (req, res) => {
-  // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
-
-  // pass in req.body instead to only update what's passed through
-  Users.update(req.body, {
-    individualHooks: true,
-    where: {
-      id: req.params.id
-    }
-  })
-    .then(dbUserData => {
-      if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
-        return;
-      }
-      res.json(dbUserData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
 });
 
 // destory session to logout

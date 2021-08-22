@@ -6,11 +6,11 @@ const { Post, Users, Comment} = require('../models');
 router.get('/', (req, res) => {
   console.log('======================');
   Post.findAll({
-    // order: [ ['created_at', 'DESC'] ],
+    order: [ ['created_at', 'DESC'] ],
     include: [
         {
             model: Comment,
-            // attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'createdAt'],
             include: {
             model: Users,
             attributes: ['username']
@@ -47,7 +47,7 @@ router.get('/post/:id', (req, res) => {
     include: [
       {
         model: Comment,
-        // attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'createdAt'],
         include: {
           model: Users,
           attributes: ['username']
@@ -67,7 +67,7 @@ router.get('/post/:id', (req, res) => {
 
       const post = dbPostData.get({ plain: true });
       const navTitle = "The tech Blog"
-      console.log(post)
+
       res.render('single-post', {
         post,
         loggedIn: req.session.loggedIn,
@@ -80,13 +80,24 @@ router.get('/post/:id', (req, res) => {
     });
 });
 
+// login
 router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/dashboard');
+    return;
+  }
+  navTitle = "The Tech Blog"
+  res.render('login', {navTitle});
+});
+
+// signup
+router.get('/signup', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
 
-  res.render('login');
+  res.render('signup');
 });
 
 

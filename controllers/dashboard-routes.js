@@ -28,7 +28,7 @@ router.get('/', withAuth, (req, res) => {
   .then(dbPostData => {
     const posts = dbPostData.map(post => post.get({ plain: true }));
     navTitle = "Dashboard";
-    res.render('dashboard', { posts,navTitle, loggedIn: true});
+    res.render('dashboard', { posts, navTitle, loggedIn: true});
   })
   .catch(err => {
     console.log(err);
@@ -36,6 +36,7 @@ router.get('/', withAuth, (req, res) => {
   });
 });
 
+//get specific post to edit
 router.get('/post/:id', withAuth, (req, res) => {
   Post.findByPk(req.params.id, {
     include: [

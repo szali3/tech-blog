@@ -15,22 +15,19 @@
          <a href="/" class="nav-item ">Home</a>
          <a href="/dashboard" class="nav-item ">Dashboard</a>
         {{#if loggedIn}}
-          {{!-- <a href="/dashboard" class="nav-item ">Dashboard</a> --}}
-          <button id="logout" class="btn-no-style">Logout</button>
+          <a href="/" id="logout" class="nav-item">Logout</a>
+          {{!-- <button id="logout" class="nav-item">Logout</button> --}}
         {{else}}
           <a href="/login" class="nav-item ">Login</a>
         {{/if}}
       </nav>
        <h1>
-        <a href="/"class="app-title"><i class="fab fa-github"></i>{{navTitle}}</a>
+        <a href=""class="app-title"><i class="fab fa-github"></i>{{navTitle}}</a>
       </h1>
     </header>
     <main>
       {{{ body }}}
     </main>
-    <footer>
-
-    </footer>
   </div>
   
   {{#if loggedIn}}

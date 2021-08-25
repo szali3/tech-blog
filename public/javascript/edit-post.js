@@ -7,7 +7,6 @@ async function createPostFormHandler(event){
     const title = document.querySelector('input[name="edit-title"]').value.trim();
     const content = document.querySelector("#edit-content").value.trim();
    
-    
     if (title && content)       {
       const response = await fetch(`/api/posts/${id}`, {
         method: 'put',
@@ -30,7 +29,13 @@ async function deletePostFormHandler(event){
   event.preventDefault();
 
   const response = await fetch(`/api/posts/${id}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    body: JSON.stringify({
+      post_id: id
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
   });
 
   if (response.ok) {

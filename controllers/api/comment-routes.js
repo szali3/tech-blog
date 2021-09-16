@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
 
 // create new comment
 router.post('/', withAuth, (req, res) => {
-  // expects => {comment_text: "This is the comment", user_id: 1, post_id: 2}
   Comment.create({
     comment_text: req.body.comment_text,
     user_id: req.session.user_id,
@@ -27,7 +26,7 @@ router.post('/', withAuth, (req, res) => {
     });
 });
 
-// delete comment
+// Delete comment
 router.delete('/:id', withAuth, (req, res) => {
   Comment.destroy({
     where: {
@@ -36,7 +35,7 @@ router.delete('/:id', withAuth, (req, res) => {
   })
     .then(dbCommentData => {
       if (!dbCommentData) {
-        res.status(404).json({ message: 'No comment found with this id!' });
+        res.status(404).json({ message: 'No comment(s) found with this user ID!' });
         return;
       }
       res.json(dbCommentData);

@@ -1,6 +1,5 @@
 async function loginFormHandler(event) {
   event.preventDefault();
-  console.log("=============LOGIN=================")
   const username = document.querySelector('#username-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
 
@@ -24,7 +23,6 @@ async function loginFormHandler(event) {
   
 async function signupFormHandler(event) {
   event.preventDefault();
-  console.log("=============SIGNUP=================")
   const username = document.querySelector('#username-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
 

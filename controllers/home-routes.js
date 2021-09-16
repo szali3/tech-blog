@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
 const { Post, Users, Comment} = require('../models');
 
 // get all posts for homepage
@@ -9,16 +8,16 @@ router.get('/', (req, res) => {
     order: [ ['created_at', 'DESC'] ],
     include: [
         {
-            model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'createdAt'],
-            include: {
-            model: Users,
-            attributes: ['username']
-            }
+          model: Comment,
+          attributes: ['id', 'comment_text', 'post_id', 'user_id', 'createdAt'],
+          include: {
+          model: Users,
+          attributes: ['username']
+          }
         },
         {
-            model: Users,
-            attributes: ['username']
+          model: Users,
+          attributes: ['username']
         }
       ]
     })
@@ -45,20 +44,20 @@ router.get('/post/:id', (req, res) => {
       id: req.params.id
     },
     include: [
-      {
-        model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'createdAt'],
-        include: {
+        {
+          model: Comment,
+          attributes: ['id', 'comment_text', 'post_id', 'user_id', 'createdAt'],
+          include: {
+            model: Users,
+            attributes: ['username']
+          }
+        },
+        {
           model: Users,
           attributes: ['username']
         }
-      },
-      {
-        model: Users,
-        attributes: ['username']
-      }
-    ]
-  })
+      ]
+    })
     .then(dbPostData => {
       if (!dbPostData) {
         res.status(404).json({ message: 'No post found with this id' });
@@ -80,7 +79,7 @@ router.get('/post/:id', (req, res) => {
     });
 });
 
-// login
+// login and change Nav title
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/dashboard');
@@ -96,7 +95,6 @@ router.get('/signup', (req, res) => {
     res.redirect('/');
     return;
   }
-
   res.render('signup');
 });
 

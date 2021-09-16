@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const { Post,Users } = require('../../models');
+const { Users } = require('../../models');
 
 // api/users/
 
-// get all users
+// get all the users
 router.get('/', (req, res) => {
   Users.findAll({})
     .then(dbUserData => res.json(dbUserData))
@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
   })
     .then(dbUserData => {
       if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
+        res.status(404).json({ message: 'No user found with this ID' });
         return;
       }
       res.json(dbUserData);
@@ -62,23 +62,23 @@ router.post('/login', (req, res) => {
     }
   }).then(dbUserData => {
     if (!dbUserData) {
-      res.status(400).json({ message: 'No user with that username!' });
+      res.status(400).json({ message: 'Username not found' });
       return;
     }
 
     const validPassword = dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect password!' });
+      res.status(400).json({ message: 'password Incorrect' });
       return;
     }
-
+    
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
   
-      res.json({ user: dbUserData, message: 'You are now logged in!' });
+      res.json({ user: dbUserData, message: 'Log in successful' });
     });
   });
 });
@@ -104,7 +104,7 @@ router.delete('/:id', (req, res) => {
   })
     .then(dbUserData => {
       if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
+        res.status(404).json({ message: 'No user found with this ID' });
         return;
       }
       res.json(dbUserData);
